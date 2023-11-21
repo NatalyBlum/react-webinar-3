@@ -42,9 +42,11 @@ class Store {
    * Добавление новой записи
    */
   addItem() {
+    // const code = this.state.length + 1;
+    const code = (Math.random() * this.state.list.length * 10).toFixed(2);
     this.setState({
       ...this.state,
-      list: [...this.state.list, {code: this.state.list.length + 1, title: 'Новая запись'}]
+      list: [...this.state.list, {code: code, title: 'Новая запись'}]
     })
   };
 
