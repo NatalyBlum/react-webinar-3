@@ -1,4 +1,3 @@
-import { createElement } from "react";
 
 /**
  * Хранилище состояния приложения
