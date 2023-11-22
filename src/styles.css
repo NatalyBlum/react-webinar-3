@@ -45,17 +45,26 @@ body {
   color: #fff;
 }
 
+.Wrap {
+  display: flex;
+  width: 100%;
+}
+
 .Item-code {
   padding: 20px 10px 20px 20px;
 }
 
 .Item-title {
-  width: 100%;
   padding: 20px 10px;
+  padding-right: 0;
 }
 
 .Item-actions {
   display: flex;
   justify-content: flex-end;
   padding: 20px 20px 20px 10px;
+}
+
+.Click {
+  padding: 20px 10px;
 }
