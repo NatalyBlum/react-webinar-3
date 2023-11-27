@@ -10,6 +10,15 @@ function App({store}) {
 
   const list = store.getState().list;
 
+  function pluralize(number) {
+    let words = ["раза", "раз"];
+    if (number % 10 >= 2 && number % 10 <= 4 && (number % 100 < 10 || number % 100 >= 20)) {
+      return words[0];
+    } else {
+      return words[1];
+    }
+  }
+
   return (
     <div className='App'>
       <div className='App-head'>
@@ -23,10 +32,10 @@ function App({store}) {
           list.map(item =>
             <div key={item.code} className='List-item'>
               <div className={'Item' + (item.selected ? ' Item_selected' : '')}
-                   onClick={(e) => store.selectItem(e, item.code)}>
+                   onClick={() => store.selectItem(item.code)}>
                 <div className='Wrap'>
                   <div className='Item-code'>{item.code}</div>
-                  <div className='Item-title'>{item.title}</div>
+                  <div className='Item-title'>{item.title + (item.click > 0 ? ` | Выделяли ${item.click} ${pluralize(item.click)}` : "")}</div>
                 </div>
                 <div className='Item-actions'>
                   <button onClick={() => store.deleteItem(item.code)}>
