@@ -1,21 +1,47 @@
-import React from "react";
-import PropTypes from 'prop-types';
+import React, {useState, getState} from "react";
+import Modal from '../modal';
+import PropTypes from "prop-types";
 import './style.css';
 
-function Controls({onAdd}) {
+function Controls(props) {
+
+  const [isModal, setModal] = useState(false);
+
+  const callbacks = {
+    showModal: () => {
+      setModal(true);
+    },
+    closeModal: () => {
+      setModal(false);
+    }
+  }
+
   return (
     <div className='Controls'>
-      <button onClick={() => onAdd()}>Добавить</button>
+      <button onClick={callbacks.showModal}>Перейти</button>
+      {isModal ? <Modal
+        title='Корзина'
+        basket={props.basket}
+        amount={props.amount}
+        onDeleteItem={props.onDeleteItem}
+        button={<button onClick={callbacks.closeModal}>Закрыть</button>}
+      /> : null
+      }
     </div>
   )
 }
 
 Controls.propTypes = {
-  onAdd: PropTypes.func
+  amount: PropTypes.number,
+  basket: PropTypes.arrayOf(PropTypes.shape({
+    code: PropTypes.number
+  })).isRequired,
+  showModal: PropTypes.func,
 };
 
 Controls.defaultProps = {
-  onAdd: () => {}
+  onDeleteItem: () => {
+  },
 }
 
 export default React.memo(Controls);

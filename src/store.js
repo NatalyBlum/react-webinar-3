@@ -1,5 +1,3 @@
-import {generateCode} from "./utils";
-
 /**
  * Хранилище состояния приложения
  */
@@ -41,48 +39,59 @@ class Store {
   }
 
   /**
-   * Добавление новой записи
+   * Подсчет стоимости товара в корзине
    */
-  addItem() {
+  costCalculation() {
     this.setState({
       ...this.state,
-      list: [...this.state.list, {code: generateCode(), title: 'Новая запись'}]
+      amount: this.state.basket.reduce((acc, item) => {
+        acc += item.quantity * item.price;
+        return acc;
+      }, 0)
     })
+  }
+
+  /**
+   * Добавление продукта в корзину
+   */
+  addItem(code) {
+    this.setState({
+      ...this.state,
+      basket: [
+        ...this.state.list.filter(item => item.code === code || item.quantity !== 0)
+                          .map(item => {
+                            if(item.code === code) {
+                              item.quantity += 1;
+                              return {...item, quantity: item.quantity};
+                            } else {
+                              return item;
+                            }
+                          })
+      ],
+    })
+    this.costCalculation();
   };
 
   /**
-   * Удаление записи по коду
+   * Удаление продукта из корзины
    * @param code
    */
   deleteItem(code) {
     this.setState({
       ...this.state,
       // Новый список, в котором не будет удаляемой записи
-      list: this.state.list.filter(item => item.code !== code)
-    })
-  };
-
-  /**
-   * Выделение записи по коду
-   * @param code
-   */
-  selectItem(code) {
-    this.setState({
-      ...this.state,
+      basket: this.state.basket.filter(item => item.code !== code),
       list: this.state.list.map(item => {
         if (item.code === code) {
-          // Смена выделения и подсчёт
-          return {
-            ...item,
-            selected: !item.selected,
-            count: item.selected ? item.count : item.count + 1 || 1,
-          };
+          item.quantity = 0;
+          return {...item, quantity: item.quantity};
+        } else {
+          return item;
         }
-        // Сброс выделения если выделена
-        return item.selected ? {...item, selected: false} : item;
       })
     })
-  }
+    this.costCalculation();
+  };
 }
 
 export default Store;

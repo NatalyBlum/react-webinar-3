@@ -1,0 +1,14 @@
+.Header-wrapper {
+  display: flex;
+  justify-content: flex-end;
+  font-size: 18px;
+}
+
+.Header-title {
+  padding: 20px 10px 20px 20px;
+}
+
+.Header-data {
+  padding: 20px 0 20px 5px;
+  font-weight: 700;
+}
