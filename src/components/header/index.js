@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
-import Controls from "../controls";
-import {plural} from '../../utils.js'
+import {plural} from '../../utils.js';
+import {formatPrice} from '../../utils.js';
 import './style.css';
 
 function Header(props) {
@@ -13,12 +13,9 @@ function Header(props) {
             one: 'товар',
             few: 'товара',
             many: 'товаров',
-          })} / ${props.amount} ₽`
+          })} / ${formatPrice(props.amount)} ₽`
         : 'пусто'}
       </div>
-      <Controls basket={props.basket}
-                amount={props.amount}
-                onDeleteItem={props.onDeleteItem}/>
     </div>
   )
 }
@@ -29,12 +26,6 @@ Header.propTypes = {
   basket: PropTypes.arrayOf(PropTypes.shape({
     code: PropTypes.number
   })).isRequired,
-  onDeleteItem: PropTypes.func,
 };
-
-Header.defaultProps = {
-  onDeleteItem: () => {
-  },
-}
 
 export default React.memo(Header);

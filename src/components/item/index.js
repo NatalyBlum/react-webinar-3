@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
+import {formatPrice} from '../../utils.js'
 import './style.css';
 
 function Item(props) {
@@ -11,12 +12,13 @@ function Item(props) {
         {props.item.title}
       </div>
       <div className='Item-block'>
-        <div className='Item-price'>{props.item.price} ₽</div>
-        <div className='Item-count'>
-          {props.item.quantity ? `${props.item.quantity} шт` : null}
-        </div>
+        <div className='Item-price'>{formatPrice(props.item.price)} ₽</div>
+        {(props.item.quantity > 0) ?
+          <div className='Item-count'>{props.item.quantity} шт</div>
+          : null
+        }
         <div className='Item-actions'>
-          <button onClick={() => props.callback(props.item.code)}>
+          <button className='Item-btn' onClick={() => props.callback(props.item.code)}>
             {props.title}
           </button>
         </div>

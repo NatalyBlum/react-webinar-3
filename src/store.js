@@ -52,6 +52,26 @@ class Store {
   }
 
   /**
+   * Открывание модальное окна
+   */
+  closeModal() {
+    this.setState({
+      ...this.state,
+      isModal: false,
+    })
+  }
+
+  /**
+   * Закрывание модального окна
+   */
+    showModal() {
+      this.setState({
+        ...this.state,
+        isModal: true,
+      })
+    }
+
+  /**
    * Добавление продукта в корзину
    */
   addItem(code) {
@@ -61,8 +81,8 @@ class Store {
         ...this.state.list.filter(item => item.code === code || item.quantity !== 0)
                           .map(item => {
                             if(item.code === code) {
-                              item.quantity += 1;
-                              return {...item, quantity: item.quantity};
+                              const quantity = item.quantity += 1;
+                              return {...item, quantity: quantity};
                             } else {
                               return item;
                             }
@@ -71,6 +91,11 @@ class Store {
     })
     this.costCalculation();
   };
+
+  // formatPrice(num) {
+  //   const priceFormat = String(num).replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1 ");
+  //   return priceFormat;
+  // }
 
   /**
    * Удаление продукта из корзины

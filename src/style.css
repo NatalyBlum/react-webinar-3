@@ -1,0 +1,8 @@
+.wrapper {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.Modal-button {
+  padding: 3px 13px 2px 13px;
+}

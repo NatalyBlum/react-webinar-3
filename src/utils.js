@@ -42,6 +42,11 @@ export const generateCode1 = (function (start = 0) {
   return () => gen.next().value;
 }());
 
+export function formatPrice(num) {
+  const priceFormat = String(num).replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1 ");
+  return priceFormat;
+}
+
 /**
  * Генератор чисел с шагом 1
  * Вариант с использованием функции как объекта для хранения значения value

@@ -1,6 +1,6 @@
 import React from "react";
 import './style.css';
-import Item from '../item';
+import BasketModal from '../basketModal';
 import PropTypes from "prop-types";
 
 function Modal(props) {
@@ -12,21 +12,9 @@ function Modal(props) {
           <h3 className="Modal-title">{props.title}</h3>
           {props.button && <div className="Modal-footer">{props.button}</div>}
         </div>
-        <div className="Modal-body">
-          <div className="Modal-content">
-            {props.basket.map(item =>
-              <div className='Modal-item' key={item.code}>
-                <Item item={item}
-                      title={'Удалить'}
-                      callback={props.onDeleteItem}/>
-              </div>
-            )}
-          </div>
-          <div className='Modal-total'>
-            <p className='Modal-descr'>Итого</p>
-            <p className='Modal-amount'>{props.amount} ₽</p>
-          </div>
-        </div>
+        <BasketModal  amount={props.amount}
+                      basket={props.basket}
+                      onDeleteItem={props.onDeleteItem}/>
       </div>
     </div>
   );
@@ -35,6 +23,7 @@ function Modal(props) {
 Modal.propTypes = {
   button: PropTypes.node,
   title: PropTypes.node,
+  amount: PropTypes.number,
   basket: PropTypes.arrayOf(PropTypes.shape({
     code: PropTypes.number
   })).isRequired,

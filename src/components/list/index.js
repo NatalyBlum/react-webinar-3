@@ -8,7 +8,7 @@ function List(props) {
     <div className='List'>{
       props.list.map(item =>
         <div key={item.code} className='List-item'>
-          <Item item={item} title={'Добавить'} callback={props.onAddItem}/>
+          <Item item={item} title={props.title} callback={props.func}/>
         </div>
       )}
     </div>
@@ -20,11 +20,11 @@ List.propTypes = {
   list: PropTypes.arrayOf(PropTypes.shape({
     code: PropTypes.number
   })).isRequired,
-  onAddItem: PropTypes.func,
+  func: PropTypes.func,
 };
 
 List.defaultProps = {
-  onAddItem: () => {
+  func: () => {
   },
 }
 

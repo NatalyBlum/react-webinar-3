@@ -10,5 +10,7 @@
 
 .Header-data {
   padding: 20px 0 20px 5px;
+  font-size: 18px;
   font-weight: 700;
+  line-height: 21px;
 }
