@@ -1,11 +1,12 @@
 import {memo, useCallback, useEffect} from 'react';
+import React from 'react'
 import Item from "../../components/item";
 import PageLayout from "../../components/page-layout";
-import Head from "../../components/head";
-import BasketTool from "../../components/basket-tool";
-import List from "../../components/list";
 import useStore from "../../store/use-store";
 import useSelector from "../../store/use-selector";
+import { Route, Routes } from 'react-router-dom';
+import ProductLayout from '../../components/product-layout';
+import StoreLayout from '../../components/store-layout';
 
 function Main() {
 
@@ -36,12 +37,23 @@ function Main() {
 
   return (
     <PageLayout>
-      <Head title='Магазин'/>
-      <BasketTool onOpen={callbacks.openModalBasket} amount={select.amount}
-                  sum={select.sum}/>
-      <List list={select.list} renderItem={renders.item}/>
+      <Routes>
+        <Route  path={`/item/:id`}
+                element={<ProductLayout list={select.list}
+                                        onOpen={callbacks.openModalBasket}
+                                        amount={select.amount}
+                                        sum={select.sum}/>}
+                                        />
+        <Route  path={'/*'}
+                element={<StoreLayout list={select.list}
+                                      renderItem={renders.item}
+                                      onOpen={callbacks.openModalBasket}
+                                      amount={select.amount}
+                                      sum={select.sum}
+                                      />}
+                                    />
+      </Routes>
     </PageLayout>
-
   );
 }
 

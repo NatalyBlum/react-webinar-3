@@ -1,0 +1,20 @@
+.Product-wrapper {
+  padding: 40px;
+  padding-top: 23px;
+  font-size: 18px;
+}
+
+.Product-descr {
+  padding-bottom: 20px;
+}
+
+.Product-data {
+  padding: 10px;
+  font-weight: 700;
+}
+
+.Product-weight {
+  padding-bottom: 20px;
+  font-weight: 700;
+  font-size: 24px;
+}
