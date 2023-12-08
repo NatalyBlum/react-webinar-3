@@ -4,7 +4,6 @@ import BasketTool from "../basket-tool";
 import { useParams } from 'react-router-dom';
 import Product from '../product';
 import useStore from "../../store/use-store";
-import useSelector from "../../store/use-selector";
 
 function ProductLayout(props) {
 
@@ -24,11 +23,6 @@ function ProductLayout(props) {
     store.actions.catalog.loadItem(id);
   }, [id]);
 
-
-  const select = useSelector(state => ({
-    currentItem: state.catalog.currentItem,
-  }));
-
   return (
     <>
       {isComponentMounted &&
@@ -38,7 +32,7 @@ function ProductLayout(props) {
                     amount={props.amount}
                     sum={props.sum}
                   />
-        <Product item={select.currentItem}/>
+        <Product item={props.currentItem}/>
       </div>
       }
     </>

@@ -1,4 +1,4 @@
-import {memo, useCallback, useEffect} from 'react';
+import {memo, useCallback, useEffect, useState} from 'react';
 import React from 'react'
 import Item from "../../components/item";
 import PageLayout from "../../components/page-layout";
@@ -13,13 +13,15 @@ function Main() {
   const store = useStore();
 
   useEffect(() => {
-    store.actions.catalog.load();
-  }, []);
+    store.actions.catalog.load(skip, productPerPage);
+  }, [currentPage]);
 
   const select = useSelector(state => ({
     list: state.catalog.list,
+    currentItem: state.catalog.currentItem,
+    countProduct: state.catalog.countProduct,
     amount: state.basket.amount,
-    sum: state.basket.sum
+    sum: state.basket.sum,
   }));
 
   const callbacks = {
@@ -28,6 +30,15 @@ function Main() {
     // Открытие модалки корзины
     openModalBasket: useCallback(() => store.actions.modals.open('basket'), [store]),
   }
+
+  const [currentPage, setCurrentPage] = useState(1);
+  const [productPerPage] = useState(10);
+  const lastIndex = currentPage * productPerPage;
+  const firstIndex = lastIndex - productPerPage;
+  const skip = currentPage * productPerPage;
+  const currentProduct = select.list.slice(firstIndex, lastIndex);
+
+  const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
   const renders = {
     item: useCallback((item) => {
@@ -42,14 +53,21 @@ function Main() {
                 element={<ProductLayout list={select.list}
                                         onOpen={callbacks.openModalBasket}
                                         amount={select.amount}
-                                        sum={select.sum}/>}
-                                        />
+                                        sum={select.sum}
+                                        currentItem={select.currentItem}
+                                        />}
+                                      />
         <Route  path={'/*'}
                 element={<StoreLayout list={select.list}
                                       renderItem={renders.item}
                                       onOpen={callbacks.openModalBasket}
                                       amount={select.amount}
                                       sum={select.sum}
+                                      currentPage={currentPage}
+                                      paginate={paginate}
+                                      productPerPage={productPerPage}
+                                      currentProduct={currentProduct}
+                                      countProduct={select.countProduct}
                                       />}
                                     />
       </Routes>

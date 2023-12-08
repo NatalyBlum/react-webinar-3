@@ -3,6 +3,7 @@ import {cn as bem} from '@bem-react/classname';
 import './style.css';
 import useStore from "../../store/use-store";
 import PropTypes from "prop-types";
+import {numberFormat} from "../../utils";
 
 function Product(props) {
 
@@ -13,7 +14,7 @@ function Product(props) {
   const callbacks = {
     addToBasket: useCallback(_id => store.actions.basket.addToBasket(_id), [store]),
   }
-  
+
   return (
     <div className={cn('wrapper')}>
       <div className={cn('descr')}>
@@ -33,7 +34,7 @@ function Product(props) {
       </div>
       <div className={cn('weight')}>
         Цена:
-        <span className={cn('data')}>{props.item.price} ₽</span>
+        <span className={cn('data')}>{numberFormat(props.item.price)} ₽</span>
       </div>
       <button onClick={() => callbacks.addToBasket(id)}>Добавить</button>
     </div>

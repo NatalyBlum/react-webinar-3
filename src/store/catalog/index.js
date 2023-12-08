@@ -11,19 +11,21 @@ class Catalog extends StoreModule {
   initState() {
     return {
       list: [],
-      currentItem: {}
+      currentItem: {},
+      countProduct: 0,
     }
   }
 
-  async load() {
-    const response = await fetch('http://example.front.ylab.io/api/v1/articles', {
+  async load(skip, productPerPage) {
+    const response = await fetch(`http://example.front.ylab.io/api/v1/articles?limit=542&skip=${skip}&fields=items(_id, title, price, edition, description),count`, {
       method: 'GET',
     });
     const json = await response.json();
     console.log(json);
     this.setState({
       ...this.getState(),
-      list: json.result.items
+      list: json.result.items,
+      countProduct: json.result.count
     }, 'Загружены товары из АПИ');
   }
 
