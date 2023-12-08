@@ -17,11 +17,10 @@ class Catalog extends StoreModule {
   }
 
   async load(skip, productPerPage) {
-    const response = await fetch(`http://example.front.ylab.io/api/v1/articles?limit=542&skip=${skip}&fields=items(_id, title, price, edition, description),count`, {
+    const response = await fetch(`http://example.front.ylab.io/api/v1/articles?limit=${productPerPage}&skip=${skip}&fields=items(_id, title, price, edition, description),count`, {
       method: 'GET',
     });
     const json = await response.json();
-    console.log(json);
     this.setState({
       ...this.getState(),
       list: json.result.items,

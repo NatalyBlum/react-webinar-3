@@ -13,7 +13,7 @@ function StoreLayout(props) {
       <BasketTool onOpen={props.onOpen}
                   amount={props.amount}
                   sum={props.sum}/>
-      <List list={props.currentProduct}
+      <List list={props.list}
             renderItem={props.renderItem}
             />
       <Pagination productPerPage={props.productPerPage}

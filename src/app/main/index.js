@@ -11,6 +11,9 @@ import StoreLayout from '../../components/store-layout';
 function Main() {
 
   const store = useStore();
+  const [currentPage, setCurrentPage] = useState(1);
+  const [productPerPage] = useState(10);
+  const skip = currentPage * productPerPage;
 
   useEffect(() => {
     store.actions.catalog.load(skip, productPerPage);
@@ -30,13 +33,6 @@ function Main() {
     // Открытие модалки корзины
     openModalBasket: useCallback(() => store.actions.modals.open('basket'), [store]),
   }
-
-  const [currentPage, setCurrentPage] = useState(1);
-  const [productPerPage] = useState(10);
-  const lastIndex = currentPage * productPerPage;
-  const firstIndex = lastIndex - productPerPage;
-  const skip = currentPage * productPerPage;
-  const currentProduct = select.list.slice(firstIndex, lastIndex);
 
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
@@ -66,7 +62,6 @@ function Main() {
                                       currentPage={currentPage}
                                       paginate={paginate}
                                       productPerPage={productPerPage}
-                                      currentProduct={currentProduct}
                                       countProduct={select.countProduct}
                                       />}
                                     />
