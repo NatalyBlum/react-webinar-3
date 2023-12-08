@@ -21,7 +21,11 @@ function Pagination(props) {
       resultArray.push(1, 2, 3, 4, '...', pageNumbers.length - 1);
     } else if (currentPage > 3) {
       const index = pageNumbers.indexOf(currentPage);
-      resultArray.push(pageNumbers[0], '...', pageNumbers[index - 1], pageNumbers[index], pageNumbers[index + 1], '...', pageNumbers.length - 1);
+      if (index === pageNumbers.length - 1 || index === pageNumbers.length - 2 || index === pageNumbers.length - 3) {
+        resultArray.push(pageNumbers[0], '...', pageNumbers.length - 3, pageNumbers.length - 2, pageNumbers.length - 1);
+      } else {
+        resultArray.push(pageNumbers[0], '...', pageNumbers[index - 1], pageNumbers[index], pageNumbers[index + 1], '...', pageNumbers.length - 1);
+      }
     }
     return resultArray;
   }
