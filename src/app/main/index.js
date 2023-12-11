@@ -13,7 +13,7 @@ function Main() {
   const store = useStore();
   const [currentPage, setCurrentPage] = useState(1);
   const [productPerPage] = useState(10);
-  const skip = currentPage * productPerPage;
+  const skip = (currentPage - 1) * productPerPage;
 
   useEffect(() => {
     store.actions.catalog.load(skip, productPerPage);
