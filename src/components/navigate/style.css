@@ -1,0 +1,13 @@
+.Navigate-main {
+  display: flex;
+  padding: 20px;
+}
+
+.Navigate-btn {
+  position: relative;
+  padding: 0;
+  border: none;
+  font-size: 18px;
+  color: #0087E9;
+  background-color: #fff;
+}

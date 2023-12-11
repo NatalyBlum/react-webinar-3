@@ -4,12 +4,6 @@
   justify-content: space-between;
 }
 
-.BasketTool-main {
-  display: flex;
-  padding: 20px;
-
-}
-
 .BasketTool-label {
   padding: 20px;
   font-size: 18px;
@@ -18,13 +12,4 @@
 .BasketTool-total {
   font-weight: bold;
   margin: 0 20px;
-}
-
-.BasketTool-btn {
-  position: relative;
-  padding: 0;
-  border: none;
-  font-size: 18px;
-  color: #0087E9;
-  background-color: #fff;
 }
