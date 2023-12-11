@@ -27,7 +27,7 @@ function ProductLayout(props) {
     <>
       {isComponentMounted &&
       <div>
-        <Head title={select.currentItem.title}/>
+        <Head title={props.currentItem.title}/>
         <BasketTool onOpen={props.onOpen}
                     amount={props.amount}
                     sum={props.sum}
